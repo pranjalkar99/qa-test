@@ -22,11 +22,13 @@
       <h5 class="mb-1"> Note: Inspect elements, update the html, and then right click and download. </h5>
       <h6>P.S : Common elements to be added: <em>font-weight: bold;</em> and text props like:<em> text-align: left;</em>
       </h6>
+      <b><em style="color:red;">Changes made are not saved in server for now. Kindly download ur changes by clicking-> Save HTML and download.</em></b>
 
     </div>
 
     <!-- This is the body container-->
     <div class="d-flex mx-4 my-5 ">
+
       <div id="editor" contenteditable="true"
         class="w-75 d-flex align-items-center px-2 py-0 rounded bg-light form-control">
         <script>
@@ -48,11 +50,14 @@
             const editor = document.getElementById("editor");
             editor.contentEditable = "false";
             editor.style.backgroundColor = "#eee";
+            var gfg = document.URL;
+            time = new Date().getTime();
             alert("Content saved!");
             const blob = new Blob([editor.innerHTML], { type: "text/html" });
             const a = document.createElement("a");
             a.href = URL.createObjectURL(blob);
-            a.download = "content.html";
+            
+            a.download = gfg+"_"+time+".html";
             a.click();
           }
 
@@ -67,16 +72,16 @@
       <div class="ms-4 d-flex col-md-3 justify-content-between">
         <div>
           <button class="btn btn-primary" onclick=saveHTML()>Save HTML and download</button>
-          <p class="m-0 small opacity-75">(Dont forget to
+          <p class="m-0 small opacity-75"><del>(Dont forget to
             rename_for_proper
-            retention.)</p>
+            retention.)</del> <ins>{Now renamed_accordingly!}</ins></p>
         </div>
         <form method="post">
-          <button type="submit" class="btn btn-success px-4">Next</button>
+          <button type="submit" class="btn btn-success px-4">Next Page</button>
         </form>
+      
 
       </div>
-
     </div>
 
     <div class="d-flex flex-column w-100 justify-content-between align-items-center mt-5 ">
