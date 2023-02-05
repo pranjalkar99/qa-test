@@ -11,10 +11,15 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
   <script>
     function displayHTML(html) {
       document.getElementById("htmlContainer").innerHTML = html;
     }
+   function buttonColour(){
+    document.getElementById("toggle").style.backgroundColor='#911';
+   }
+   
   </script>
 </head>
 <style>
@@ -35,8 +40,25 @@
   {% block content %}
   {% endblock %}
   <div>
+    
+    {% if dboption>2 %}
+    Change db now!(U can goto db2 from here)
+    <form method="post">
+      <input type="radio" id="db1" name="db" value="db1">
+      <label for="html">db1-Old database(50 files)</label><br>
+      <input type="radio" id="db2" name="db" value="db2">
+      <label for="css">db2- New database(200 files added) </label><br>
+      <button type="submit">Submit</button>
+    </form>
+    {% else %}
+    Click here  to go to /serve-> <a href="{{url_for('serve_html')}}">Click Now!</a>
+    {% endif %}
+  </div>
+  
+  <div>
 
     <h2 class="mb-5">List of files</h2>
+    
     {% for i in ids %}
 
     <ul class="m-0 list-item">
@@ -45,13 +67,24 @@
           <div class="col-md-2 p-0">
             <p class="m-0"><b>{{i}}</b></p>
           </div>
+          <div class="col-md-2 p-2">
+            <p class="m-0"><b>{{ids[i]['name']}}</b></p>
+          </div>
           <div class="col-md-3">
             <b>Link:</b> <a href={{ids[i]['link']}}>Finish Quality Checking now!!</a>
           </div>
           <div class="col-md-2 ">
-            Status:<button type="button" class="btn btn-success ms-3 {{ids[i]['status']}}">{{ids[i]['status']}}</button>
+            Status:<button type="button" id="change" class="btn btn-success ms-3 {{ids[i]['status']}}">{{ids[i]['status']}}</button>
           </div>
-        </div>
+          <div class="col-md-2 " id="checkbox-container">
+
+              <input type="checkbox" id="status" name="status" value="status">
+              Done Checking
+            
+          </div>
+        
+        
+      </div>
       </li>
     </ul>
 
